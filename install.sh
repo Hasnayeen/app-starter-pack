@@ -26,7 +26,7 @@ then
   echo ""
 else
   echo ""
-  echo "${red}Error: Please install docker before installing Goodwork software${reset}"
+  echo "${red}Error: Please install docker before installing Komla software${reset}"
   echo ""
   exit 1
 fi
@@ -41,7 +41,7 @@ then
   echo ""
 else
   echo ""
-  echo "${red}Error: Please install docker-compose before installing Goodwork software${reset}"
+  echo "${red}Error: Please install docker-compose before installing Komla software${reset}"
   echo ""
   exit 1
 fi
@@ -66,9 +66,9 @@ $COMPOSE build php
 
 if [[ $local == "local" ]]
 then
-  $COMPOSE run --rm -w /var/www php composer install --optimize-autoloader --no-dev
-else
   $COMPOSE run --rm -w /var/www php composer install
+else
+  $COMPOSE run --rm -w /var/www php composer install --optimize-autoloader --no-dev
 fi
 
 $COMPOSE up -d
@@ -79,7 +79,10 @@ $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
 $COMPOSE run --rm -w /var/www php php artisan migrate --seed
 
-$COMPOSE run --rm -w /var/www php php artisan route:cache
+if [[ $local != "local" ]]
+then
+  $COMPOSE run --rm -w /var/www php php artisan route:cache
+fi
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
 
