@@ -46,12 +46,14 @@ else
   exit 1
 fi
 
+# Get domain name for ssl cert file
+domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
+
 if [[ $local == "local" ]]
 then
-  # Get domain name for ssl cert file
-  domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
-
-  # Replace the domain in site.conf file
+  # Replace the domain in site.dev.conf file
+  sed -i -e "s/example.com/$domain/g" docker/site.dev.conf
+else
   sed -i -e "s/example.com/$domain/g" docker/site.conf
 fi
 
@@ -86,7 +88,12 @@ fi
 
 $COMPOSE run --rm -w /var/www php php artisan storage:link
 
-git checkout docker/site.conf
+if [[ $local == "local" ]]
+then
+  git checkout docker/site.dev.conf
+else
+  git checkout docker/site.conf
+fi
 
 echo ""
 echo "${green}Installation complete.${reset}"
