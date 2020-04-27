@@ -811,16 +811,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v1.0.13",
+            "version": "v1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "2f2035c2be547f7af7782c0231eebf7413d5d9e0"
+                "reference": "a6b43843c89304fe96f9f98fcb3f1e2660b0deae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/2f2035c2be547f7af7782c0231eebf7413d5d9e0",
-                "reference": "2f2035c2be547f7af7782c0231eebf7413d5d9e0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/a6b43843c89304fe96f9f98fcb3f1e2660b0deae",
+                "reference": "a6b43843c89304fe96f9f98fcb3f1e2660b0deae",
                 "shasum": ""
             },
             "require": {
@@ -864,7 +864,7 @@
                 }
             ],
             "description": "A front-end framework for Laravel.",
-            "time": "2020-04-23T01:49:34+00:00"
+            "time": "2020-04-27T13:47:28+00:00"
         },
         {
             "name": "monolog/monolog",
