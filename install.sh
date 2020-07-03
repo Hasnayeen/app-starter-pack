@@ -7,7 +7,7 @@ reset=`tput sgr0`
 
 echo -n 'Install for production environment? (Y/n):'
 
-read -n 1 $ans
+read -n 1 ans
 
 if [[ ( "$ans" == "Y" ) || ( "$ans" == "y" ) ]]
 then
@@ -59,9 +59,9 @@ fi
 
 if [[ $local == "local" ]]
 then
-  COMPOSE="sudo docker-compose -f docker-compose.dev.yml"
+  COMPOSE="docker-compose -f docker-compose.dev.yml"
 else
-  COMPOSE="sudo docker-compose"
+  COMPOSE="docker-compose"
 fi
 
 $COMPOSE build php
@@ -79,7 +79,7 @@ $COMPOSE run --rm -w /var/www php php artisan key:generate
 
 $COMPOSE run --rm -w /var/www php chmod -R 777 /var/www/storage
 
-$COMPOSE run --rm -w /var/www php php artisan migrate --seed
+$COMPOSE run --rm -w /var/www php php artisan migrate --seed --force
 
 if [[ $local != "local" ]]
 then

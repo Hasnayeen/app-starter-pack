@@ -6,6 +6,10 @@ RUN echo "cgi.fix_pathinfo=0;" > /usr/local/etc/php-fpm.d/php.ini
 
 RUN apt-get update && apt-get -y install --no-install-recommends libpng-dev zip unzip git && docker-php-ext-install pdo_mysql gd bcmath
 
+RUN pecl install -o -f redis \
+    &&  rm -rf /tmp/pear \
+    &&  docker-php-ext-enable redis
+
 # Set git to use http instead ssh
 RUN git config --global url."https://github.com/".insteadOf git@github.com:
 RUN git config --global url."https://".insteadOf git://
