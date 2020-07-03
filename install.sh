@@ -52,7 +52,7 @@ domain=$(awk 'BEGIN{FS="=";RS="\n"}{if($1 == "SSL_CERT_DOMAIN") print $2}' .env)
 if [[ $local == "local" ]]
 then
   # Replace the domain in site.dev.conf file
-  sed -i -e "s/example.com/$domain/g" docker/site.dev.conf
+  sed -i -e "s/example.local/$domain/g" docker/site.dev.conf
 else
   sed -i -e "s/example.com/$domain/g" docker/site.conf
 fi
